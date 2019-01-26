@@ -1,0 +1,18 @@
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t keyerd/tests:go-helloworld .
+  - docker run -d -p 3030:8080 --name  go-helloworld keyerd/tests:go-helloworld
+  - docker exec -it go-helloworld /bin/sh -c "cd tests; go test"
+
+script:
+  - docker ps | grep -q go-helloworld
+
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
