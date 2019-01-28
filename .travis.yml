@@ -9,7 +9,7 @@ script:
 - docker ps | grep -q go-helloworld
 deploy:
   provider: script
-  script: bash docker_push.sh
+  script: bash deploy.sh
   on:
     branch: master
 env:
