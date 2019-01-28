@@ -6,8 +6,8 @@ go:
 services:
 - docker
 before_install:
-- docker build -t keyerd/tests:go-helloworld .
-- docker run -d -p 80:8080 --name  go-helloworld keyerd/tests:go-helloworld
+- docker build -t $DOCKER_USERNAME/tests:go-helloworld .
+- docker run -d -p 80:8080 --name  go-helloworld $DOCKER_USERNAME/tests:go-helloworld
 - docker exec -it go-helloworld /bin/sh -c "cd tests; go test"
 script:
 - docker ps | grep -q go-helloworld
